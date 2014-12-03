@@ -5,9 +5,9 @@ require 'ostruct'
 describe CxpbbgRest::Configuration, "default values without a cxpbbg.yml" do
   before(:each) do
     File.stub(:exist?).and_return(false) # simulate cxpbbg.yml not existing
-    stub_const('Rails', double('Rails',:root => "#{Dir.pwd}/install/templates",
-      "::VERSION::MAJOR" => 4,
-      "::VERSION::MINOR"=>1))
+    stub_const('Rails', double('Rails',
+      :root => "#{Dir.pwd}/install/templates"
+    ))
     @config = CxpbbgRest::Configuration.new
   end
   
