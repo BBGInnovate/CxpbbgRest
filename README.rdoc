@@ -14,7 +14,7 @@ Bbg::Cxp has been tested 4.0
 
 In your <code>Gemfile</code>:
 
-  gem 'cxpbbg_rest'
+  gem 'cxpbbg_rest', :git => 'https://github.com/BBGInnovate/CxpbbgRest.git'
  
 == Using CxpbbgRest
 
@@ -24,6 +24,10 @@ bundle install
 # config/cxpbbg.yml
 rails generate cxpbbg_rest:install
 
+To test configuration:
+  in CxpbbgRest root directory, run
+  rspec spec/configuration_spec.rb
+  
 == Contributors
 
 - 

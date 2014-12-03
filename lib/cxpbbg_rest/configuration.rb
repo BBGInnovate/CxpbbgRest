@@ -11,9 +11,8 @@ module CxpbbgRest #:nodoc:
     #       user: username
     #       pass: password
     #       hostname: localhost
-    #       port: 80
+    #       port: 3001
     #       path: /api/contents/feed
-    #      log_level: FINE
     #   production:
     #       scheme: http
     #       user: username
@@ -46,6 +45,7 @@ module CxpbbgRest #:nodoc:
       def username
         unless defined?(@username)
           @username ||= user_configuration_from_key('username')
+          @username ||= default_username
         end
         @username
       end
@@ -59,6 +59,7 @@ module CxpbbgRest #:nodoc:
       def password
         unless defined?(@password)
           @password ||= user_configuration_from_key('password')
+          @password ||= default_password
         end
         @password
       end
@@ -189,9 +190,17 @@ module CxpbbgRest #:nodoc:
         '/api/contents/feed'
       end
       
+      def default_username
+        'name'
+      end
+      
+      def default_password
+        'secret'
+      end
+      
       def default_port
         { 'test'        => 80,
-          'development' => 80,
+          'development' => 3001,
           'production'  => 80
         }[::Rails.env]  || 80
       end
@@ -201,11 +210,11 @@ module CxpbbgRest #:nodoc:
       end
 
       def default_read_timeout
-        60
+        nil
       end
       
       def default_open_timeout
-        10
+        nil
       end
       
     end
