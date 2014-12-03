@@ -1,0 +1,21 @@
+production: &default
+    hostname: localhost
+    port: 80
+    path: /api/contents/feed
+    username: name
+    password: secret
+    read_timeout: 60
+    open_timeout: 30
+
+staging:
+    <<: *default
+    
+development:
+    <<: *default
+    port: 3001
+    username: name
+    password: secret
+
+test:
+    hostname: localhost
+    port: 80

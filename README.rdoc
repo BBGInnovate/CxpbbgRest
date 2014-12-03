@@ -1,0 +1,34 @@
+= CxpbbgRest
+
+CxpbbgRest is a Rails plugin that provides drop-in integration 
+for publishing content to BBG Exchange Platform
+
+provides the following features:
+
+* Configure CxpbbgRest using config/cxpbbg.yml
+
+
+Bbg::Cxp has been tested 4.0
+
+== Installation in Rails 4
+
+In your <code>Gemfile</code>:
+
+  gem 'cxpbbg_rest'
+ 
+== Using CxpbbgRest
+
+bundle install
+#
+# Generate a default configuration file
+# config/cxpbbg.yml
+rails generate cxpbbg_rest:install
+
+== Contributors
+
+- 
+- 
+
+== License
+
+Cxp::Bbg is distributed under the MIT License, copyright (c) 2014
