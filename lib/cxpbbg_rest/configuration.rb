@@ -14,11 +14,11 @@ module CxpbbgRest #:nodoc:
     #       port: 3001
     #       path: /api/contents/feed
     #   production:
-    #       scheme: http
+    #       scheme: https
     #       user: username
     #       pass: password
     #       hostname: localhost
-    #       port: 80
+    #       port: 443
     #       path: /api/contents/feed
     #       open_timeout: 300
     #       read_timeout: 300
@@ -123,6 +123,7 @@ module CxpbbgRest #:nodoc:
           @scheme ||= user_configuration_from_key('scheme')
           @scheme ||= default_scheme
         end
+        @scheme = "https" if @port == 443
         @scheme
       end
 
