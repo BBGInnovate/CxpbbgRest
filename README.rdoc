@@ -18,21 +18,61 @@ In your <code>Gemfile</code>:
  
 == Using CxpbbgRest
 
-bundle install
+  * bundle install
 #
 # Generate a default configuration file
 # config/cxpbbg.yml
-rails generate cxpbbg_rest:install
+  * rails generate cxpbbg_rest:install
 
-To test configuration:
-  in CxpbbgRest root directory, run
-  rspec spec/configuration_spec.rb
+  * To test configuration:
+    in CxpbbgRest root directory, run
+    rspec spec/configuration_spec.rb
   
-== Contributors
+  * To push content to CXP:
+    CxpbbgRest.push_content <JSON STRING> or <HASH>
 
+== Contributors
 - 
 - 
 
 == License
+CxpbbgRest is distributed under the MIT License, copyright (c) 2014
 
-Cxp::Bbg is distributed under the MIT License, copyright (c) 2014
+== Sample Content Payload (JSON string format)
+{
+  "contents": [
+    {
+      "title": "Kerry Recaps Brussels Meeting of Anti-ISIL Coalition",
+      "description": "<p>Secretary of State John Kerry briefs reporters at NATO headquarters in Brussels on a meeting of the international anti-ISIL coalition.</p>",
+      "pub_date": "2014-12-04 18:09:08 UTC",
+      "state": "active",
+      "object_name": "http://iipdigital.usembassy.gov/st/english/article/2014/12/20141203311620.html?CP.rss=true",
+      "countries": "190",
+      "language": "English",
+      "network": "EUCOM",
+      "organization": "DoS",
+      "keywords": "John Kerry; Islamic State of Iraq and the Levant; ISIL; Iraq; Syria; climate change; Ukraine; Russia",
+      "article": [
+        {
+          "format": "html",
+          "body": "By Bridget Hunter<BR>Staff Writer<BR><BR><p>Washington — An international coalition is already taking important steps to degrade and defeat the Islamic State of Iraq and the Levant (ISIL), Secretary of State John Kerry told reporters at NATO headquarters in Brussels December 3.</p>",
+          "pub_date": "2014-12-04 18:09:08 UTC",
+          "byline": {
+            "author": "iipcms@state.gov (iipcms)"
+          },
+          "guid": "8dd55cae359e8a5e71970df37b64370a5ae17774"
+        }
+      ],
+      "image": [
+        {
+          "mimetype": "image/jpeg",
+          "url": "http://photos.state.gov/libraries/america/441486/Week_1/120314_AP183531046116_300.jpg",
+          "width": "300",
+          "height": "300"
+        }
+      ]
+    }]
+}
+
+
+
