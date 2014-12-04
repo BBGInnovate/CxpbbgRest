@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
-lib = File.expand_path('../../cxpbbg_rest/lib/', __FILE__)
+dirname = File.basename(Dir.getwd)
+lib = File.expand_path("../../#{dirname}/lib/", __FILE__)
 
 $:.unshift(lib) unless $:.include?(lib)
 
