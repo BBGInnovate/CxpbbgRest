@@ -2,6 +2,7 @@ production: &default
     hostname: localhost
     port: 80
     path: /api/contents/feed
+    api_key: 
     username: name
     password: secret
     read_timeout: 60
