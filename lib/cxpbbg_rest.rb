@@ -30,9 +30,10 @@ module CxpbbgRest #:nodoc:
         @configuration = nil
       end
       
-      def push_content content=nil
+      def push_content content=nil, topic_id=nil
+        @topic_id = topic_id
         if content
-          @http_cxp = CxpbbgRest::HttpCxp.new content
+          @http_cxp = CxpbbgRest::HttpCxp.new content,@topic_id
           @http_cxp.push
         else
           msg = '{"contents":[{"title":"title1"},{"title":"title2"}]}'
