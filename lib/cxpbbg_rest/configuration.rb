@@ -35,7 +35,7 @@ module CxpbbgRest #:nodoc:
         if api_key
           hostpath = "#{hostpath}/?api_key=#{api_key}"
         end
-        
+        hostpath
       end
       
       def api_key
