@@ -32,7 +32,19 @@ module CxpbbgRest #:nodoc:
         hostport = (port==80 || port==443) ? '' : ":#{port}"
         hostpath = path.match(/^\//)? path : "/"+path
         "#{scheme}://#{hostname}#{hostport}#{hostpath}"
+        if api_key
+          hostpath = "#{hostpath}/?api_key=#{api_key}"
+        end
+        
+      end
       
+      def api_key
+        @api_key ||= user_configuration_from_key('api_key')
+        if @api_key.strip.empty?
+          nil
+        else
+          @api_key
+        end
       end
       
       #
