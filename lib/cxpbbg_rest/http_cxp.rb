@@ -6,10 +6,11 @@ module CxpbbgRest #:nodoc:
     # config/bbg_cxp.yml
     #
     class HttpCxp
-     attr_accessor :payload
+     attr_accessor :payload, topic_id
      
-     def initialize content
+     def initialize content, topic_id
        self.payload = content
+       self.topic_id = topic_id
      end
      
      def push
@@ -109,13 +110,13 @@ module CxpbbgRest #:nodoc:
          resp = fake_response(code, msg)
        rescue Net::HTTPFatalError => e
          code = /(\d*) \w+/.match("#{$!}")[1]
-         Rails.logger.error "Post #{url} Fatal #{code} #{e.message}"
+         Rails.logger.error "Post TopicId: #{self.topic_id} #{url} Fatal #{code} #{e.message}"
          msg = "#{$!} : #{url}"
          resp = fake_response(code, msg)
        rescue Exception=>e
          code = /(\d*) \w+/.match("#{$!}")[1]
          msg = "#{$!} : #{url}"
-         Rails.logger.error "  #{url} Post Fatal #{code} #{e.message}"
+         Rails.logger.error "  #{url} TopicId: #{self.topic_id} Post Fatal #{code} #{e.message}"
          resp = fake_response(code, msg)
        end
        resp
