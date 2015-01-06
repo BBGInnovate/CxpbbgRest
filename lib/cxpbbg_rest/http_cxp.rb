@@ -6,9 +6,9 @@ module CxpbbgRest #:nodoc:
     # config/bbg_cxp.yml
     #
     class HttpCxp
-     attr_accessor :payload, topic_id
+     attr_accessor :payload, :topic_id
      
-     def initialize content, topic_id
+     def initialize content, topic_id=nil
        self.payload = content
        self.topic_id = topic_id
      end
