@@ -40,7 +40,7 @@ module CxpbbgRest #:nodoc:
       
       def api_key
         @api_key ||= user_configuration_from_key('api_key')
-        if @api_key.strip.empty?
+        if @api_key && @api_key.strip.empty?
           nil
         else
           @api_key
