@@ -59,14 +59,14 @@ module CxpbbgRest #:nodoc:
        end
        # set raw_data
        req.body = data
-       res = Net::HTTP.start(uri.hostname, uri.port) do |http|
-         if uri.scheme == 'https'
-           http.use_ssl = true
-           http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-         end
-         http.read_timeout = conf.read_timeout
-         http.open_timeout = conf.open_timeout
-         response = http.request(req)
+       
+       http = Net::HTTP.new(uri.hostname, uri.port)
+       http.use_ssl = true if uri.scheme == 'https'
+       http.read_timeout = conf.read_timeout
+       http.open_timeout = conf.open_timeout
+
+       http.start do |h|
+         response = h.request(req)
          case response
            when (Net::HTTPOK || Net::HTTPSuccess)
              return response
@@ -123,3 +123,39 @@ module CxpbbgRest #:nodoc:
      end
    end
 end
+=begin
+  def fetch(url, data, headers, limit = 3)
+       raise ArgumentError, 'HTTP redirect too deep' if limit == 0
+       uri = URI.parse(url)
+       req = Net::HTTP::Post.new(uri)
+       req.basic_auth(conf.username, conf.password)
+       # set request header
+       headers.each do |k,v|
+         req[k] = v
+       end
+       # set raw_data
+       req.body = data
+       
+       res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+         if uri.scheme == 'https'
+           http.use_ssl = true
+           http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+         end
+         http.read_timeout = conf.read_timeout
+         http.open_timeout = conf.open_timeout
+         response = http.request(req)
+         case response
+           when (Net::HTTPOK || Net::HTTPSuccess)
+             return response
+           when Net::HTTPRedirection
+             new_url = redirect_url(response)
+             Rails.logger.debug "Redirect to " + new_url
+             return fetch(new_url, data, headers,limit - 1)
+           else
+             response.error!
+         end
+       end
+     end
+=end
+
+
