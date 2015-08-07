@@ -96,6 +96,7 @@ module CxpbbgRest #:nodoc:
      def post(url, opt={})
        data = opt.delete('body' )
        headers = opt['headers']
+       tries ||= 3
        begin
          resp = fetch(url, data, headers, 3)
        rescue Net::HTTPServerException => e
@@ -111,6 +112,12 @@ module CxpbbgRest #:nodoc:
        rescue Net::HTTPFatalError => e
          code = /(\d*) \w+/.match("#{$!}")[1]
          Rails.logger.error "Post TopicId: #{self.topic_id} #{url} Fatal #{code} #{e.message}"
+         tries -= 1
+         if tries > 0
+           Rails.logger.error " Retry num: #{tries}"
+           sleep 3
+           retry
+         end
          msg = "#{$!} : #{url}"
          resp = fake_response(code, msg)
        rescue Exception=>e
